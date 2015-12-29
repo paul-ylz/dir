@@ -14,9 +14,11 @@ To use:
 import "github.com/paul-ylz/dir"
 
 func main() {
-  // file is a string path to a file
+  // file is a string path to a file. If no files match it returns an empty string.
   file := dir.LastModifiedFile("/path/to/storage/pattern_*.xml")
 
-  // do something with file...
+  if file != "" {
+    // do something with file...
+  }
 }
 ```

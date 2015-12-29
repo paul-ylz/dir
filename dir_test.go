@@ -7,14 +7,15 @@ import (
 )
 
 func TestLastModifiedFileReturnsCorrectOrder(t *testing.T) {
-	const testDir = "tmp_cases"
+	const testDir = "tmp"
 
 	cases := []struct {
 		files []string
 		want  string
 	}{
-		{[]string{"foo.txt", "bar.txt", "baz.txt"}, "baz.txt"},
-		{[]string{"baz.txt", "bar.txt", "foo.txt"}, "foo.txt"},
+		{[]string{"foo.txt", "bar.txt", "baz.txt"}, "tmp/baz.txt"},
+		{[]string{"baz.txt", "bar.txt", "foo.txt"}, "tmp/foo.txt"},
+		{[]string{"foo", "bar"}, ""},
 	}
 
 	for _, c := range cases {
@@ -26,7 +27,7 @@ func TestLastModifiedFileReturnsCorrectOrder(t *testing.T) {
 		}
 		// test
 		got := LastModifiedFile(testDir + "/*.txt")
-		if got != testDir+"/"+c.want {
+		if got != c.want {
 			t.Errorf("Wanted %q, got %q", c.want, got)
 		}
 		// cleanup

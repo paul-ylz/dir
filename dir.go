@@ -24,7 +24,11 @@ func LastModifiedFile(pattern string) string {
 	}
 	sort.Sort(byTime(files))
 
-	return files[len(files)-1].path
+	if len(files) > 0 {
+		return files[len(files)-1].path
+	} else {
+		return ""
+	}
 }
 
 func getModTime(path string) time.Time {
